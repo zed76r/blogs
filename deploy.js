@@ -7,4 +7,9 @@ ghp.publish("public", {
         name: "Zed",
         email: "ghpages@zedd.dev"
     }
-}, err => err && console.error(err))
+}, err => {
+    if(err) {
+        console.error(err)
+        throw err
+    }
+})
