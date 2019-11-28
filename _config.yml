@@ -77,7 +77,7 @@ pagination_dir: page
 theme: cactus
 theme_config:
   colorscheme: white
-  projects_url: https://github.com/zedcn-com/www-zedcn-com
+  projects_url: https://github.com/zedd-dev/www
   social_links:
     github: https://github.com/ZeddG93
     telegram: https://t.me/java_android_dev
