@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Zed Blogs
+title: Zed's blogs
 subtitle:
 description:
 keywords:
@@ -76,7 +76,8 @@ pagination_dir: page
 # theme: landscape
 theme: cactus
 theme_config:
-  colorscheme: white
+  colorscheme: dark
+  highlight: tomorrow-night-bright
   projects_url: https://github.com/zedd-dev/www
   social_links:
     github: https://github.com/ZeddG93
