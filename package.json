@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "hexo": {
-    "version": "4.0.0"
+    "version": "4.2.0"
   },
   "scripts": {
     "build": "npx hexo generate",
     "deploy": "node ./deploy.js"
   },
   "dependencies": {
-    "hexo": "^4.0.0",
+    "hexo": "^4.2.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
     "hexo-generator-index": "^1.0.0",
@@ -21,6 +21,6 @@
     "hexo-server": "^1.0.0"
   },
   "devDependencies": {
-    "gh-pages": "^2.1.1"
+    "gh-pages": "^2.2.0"
   }
 }
