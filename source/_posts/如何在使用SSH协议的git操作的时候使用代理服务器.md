@@ -1,6 +1,5 @@
 ---
-title: 如何在使用SSH协议的git操作的时候使用代理服务器
-date: 2018-09-17 13:41:09
+title: 【更新】如何在使用SSH协议的git操作的时候使用代理服务器
 tags:
     - ssh
     - proxy
@@ -8,75 +7,69 @@ categories:
     - 开发日常
 ---
 
-由于我日常开发过程中经常使用Github，并且因为大家都懂的原因，不管是解析使用光棍（1.1.1.1）DNS解析到美国，或者使用国内DNS解析到新加坡，国内直连Github的速度都不尽如人意。
+日常开发过程中经常使用Github，并且因为大家都懂的原因，~~不管是解析使用光棍（1.1.1.1）DNS解析到美国，或者使用国内DNS解析到新加坡，~~国内直连Github的速度都不尽如人意。
 
-当 `git clone` 一些大的库的时候非常慢，尤其是我日常使用zsh的时候，每次`cd`到git repo的目录时git prompt会非常卡导致体验相当差。
+当 `git clone` 一些大的库的时候非常慢，尤其是使用zsh的时候，每次`cd`到git repo的目录时git prompt会非常卡导致体验相当差。
 
-网上有很多教程都是针对https协议代理，但是我比较倾向于使用ssh协议，稍作了解以后得到了本文将要描述的解决方案。
+网上有很多教程都是针对https协议代理，由于个人比较倾向于使用ssh协议，稍作了解以后得到了本文将要描述的解决方案。
 
-## 1. Requirement
+## 1. NetCat
 
-### `connect` 工具。
+本文将使用netcat来给ssh提供代理，通过netcat可以让ssh通过socks4/5和http代理进行连接。
 
-####  使用Debian系的发行版
+很多发行版都预装了netcat（即`nc`）。在终端里输入`nc`，如果提示未找到命令请自行安装。
 
-直接通过apt安装
-
-```bash
-$ sudo apt install connect-proxy
-```
-
-#### 其他Linux发行版
-
-查询各发行版的预编译包 [https://pkgs.org/download/connect-proxy](https://pkgs.org/download/connect-proxy)
-
-#### 其他平台
-
-请自行搜索`connect-proxy`或者其他替代工具。
+Windows非WSL用户可尝试ncat替代。
 
 
 ## 2. 修改ssh config文件
 
-使用你最爱的编辑器打开ssh config文件，通常这个文件都在用户根目录（*nix: ~ ; Windows: %UserProfile%）的.ssh文件夹下，有一个名为config的文件。
+使用你最爱的编辑器打开ssh config文件，默认位于`$HOME/.ssh/config`。
 
 如果没有请先创建这个文件/文件夹。
 
 ```bash
-$ vim ~/.ssh/config
+> mkdir ~/.ssh
+> touch ~/.ssh/config
+> vim ~/.ssh/config
 ```
 
-然后添加如下内容到文件中：
+如果代理使用socks5：
 
-```config
+```txt
 Host github.com
-     Hostname github.com
-     User git
-     ProxyCommand connect -H 127.0.0.1:1080 %h %p
+     ProxyCommand nc -x 127.0.0.1:1080 %h %p
+```
+
+如果使用socks4，则ProxyCommand部分替换为：
+
+```txt
+ProxyCommand nc -X 4 -x 127.0.0.1:1080 %h %p
+```
+
+如果使用socks4，则ProxyCommand部分替换为：
+
+```txt
+ProxyCommand nc -X connect -x 127.0.0.1:1080 %h %p
 ```
 
 配置文件中的几个内容简单的介绍一下：
 + `Host`一个自定义的主机名
-+ `Hostname`目标主机的地址，这里我们输入github.com
-+ `User`ssh连接时使用的用户名，git over ssh使用的用户名通常都是git
 + `ProxyCommand`ssh的代理设置
-    + `connect -H 127.0.0.1:1080 %h %p` 使用上面安装的connect-proxy工具，把%h:%p的TCP链接通过代理服务器转发。
-    + `-H 127.0.0.1:1080`是指定一个代理，这里是说指定一个http代理，代理服务器地址是127.0.0.1，端口号是1080。（你懂的软件本地默认代理）
-    + 或者可以使用`-S`链接sock代理服务
+    + `nc -x 127.0.0.1:1080 %h %p` 使用netcat通过127.0.0.1:1080的socks5代理连接到%h %p，%h是填充ssh连接的host，%p是填充ssh链接的port。在本例中代表`github.com:22`。
+      + `-x 127.0.0.1:1080`是指定一个代理服务器IP和端口
+      + 默认不指定代表使用socks5，通过`-X 4/connect`指定使用socks4/http代理
 
 
 ## 3. 测试
 
-我这里使用的代理软件有详细的日志，可以通过该日志确定git over ssh是否正常通过代理连接。如果你使用别的代理软件，可以通过在远程代理服务器日志来查看是否有相关连接。
+可以在ssh config的代理配置`nc`命令后面增加`-v`选项打印verbose日志以确定是否通过代理建立ssh连接。
+
+最后clone一下B神做的`更纱黑体`的库来测试一下速度。
 
 ```log
-[2018-09-11 16:40:22] connect to github.com:22
-[2018-09-11 16:40:22] Socket connected to ss server: ***
-```
-
-最后让我们clone一下B神做的**宇宙第一编码/console字体**`更纱黑体`的库来测试一下速度。
-
-```log
- zed  ~  time git clone git@github.com:be5invis/Sarasa-Gothic.git   
+~
+> time git clone git@github.com:be5invis/Sarasa-Gothic.git   
 
 Cloning into 'Sarasa-Gothic'...
 remote: Counting objects: 350, done.
