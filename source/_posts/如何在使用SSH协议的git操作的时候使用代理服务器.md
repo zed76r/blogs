@@ -47,7 +47,7 @@ Host github.com
 ProxyCommand nc -X 4 -x 127.0.0.1:1080 %h %p
 ```
 
-如果使用socks4，则ProxyCommand部分替换为：
+如果使用http proxy，则ProxyCommand部分替换为：
 
 ```txt
 ProxyCommand nc -X connect -x 127.0.0.1:1080 %h %p

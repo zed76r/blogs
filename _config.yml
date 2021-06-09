@@ -81,7 +81,6 @@ theme_config:
   projects_url: https://github.com/zedd-dev/www
   social_links:
     github: https://github.com/ZeddG93
-    telegram: https://t.me/java_android_dev
     mail: mailto:dev@zedd.dev
   gravatar:
     email: dev@zedd.dev
