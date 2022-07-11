@@ -6,11 +6,13 @@
     "version": "6.2.0"
   },
   "scripts": {
-    "build": "npx hexo generate",
+    "build": "hexo generate",
+    "clean": "hexo clean",
+    "server": "hexo server",
     "deploy": "node ./deploy.js"
   },
   "dependencies": {
-    "hexo": "6.2.0",
+    "hexo": "^6.2.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
     "hexo-generator-index": "^2.0.0",
