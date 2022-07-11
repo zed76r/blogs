@@ -1,5 +1,6 @@
 ---
 title: 【更新】如何在使用SSH协议的git操作的时候使用代理服务器
+date: 2022-01-01
 tags:
     - ssh
     - proxy
