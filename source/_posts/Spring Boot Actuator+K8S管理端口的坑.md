@@ -20,7 +20,7 @@ Caused by: java.lang.NumberFormatException: For input string: "tcp://10.43.20.83
 根据方法名，可以猜测这个异常和Actuator的管理端口有关。但是我很确定我的配置文件里没有问题，管理端口设置为8081：
 
 ```
-management.erver.port=8081
+management.server.port=8081
 ```
 
 为了找出问题所在，我又在k8s上跑了一个bash的pod，输出了一下环境变量，结果就发现了罪魁祸首：
@@ -29,7 +29,7 @@ management.erver.port=8081
 SERVER_PORT=tcp://10.43.20.83:80
 ```
 
-原来Spring Boot会用这个环境变量覆盖`management.port`的值²。而这个环境变量是k8s根据我的服务名字自动生成的。因为我有一个项目叫server，它有一个svc负责暴露负载均衡，svc也跟随项目叫server，k8s就会根据这个生成这个以svc名字+PORT命名的环境变量。
+原来Spring Boot会用这个环境变量覆盖`management.server.port`的值²。而这个环境变量是k8s根据我的服务名字自动生成的。因为我有一个项目叫server，它有一个svc负责暴露负载均衡，svc也跟随项目叫server，k8s就会根据这个生成这个以svc名字+PORT命名的环境变量。
 
 暂时删除svc server以后，项目就能正常启动了。
 
