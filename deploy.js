@@ -2,7 +2,7 @@ const ghp = require('gh-pages')
 
 ghp.publish("public", {
     branch: 'main',
-    repo: `https://${process.env.GH_TOKEN}@github.com/zedd-dev/www.git`,
+    repo: `https://x-access-token:${process.env.GH_TOKEN}@github.com/zedd-dev/www.git`,
     user: {
         name: "gh-pages",
         email: "ghpages@zedd.dev"

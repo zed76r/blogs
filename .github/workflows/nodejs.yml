@@ -10,19 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js latest
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: latest
-      - name: npm install, build, and deploy
+      - name: install, build, and deploy
         run: |
-          npx pnpm i
-          npm run clean
-          npm run build
+          npm i -g pnpm
+          pnpm i
+          pnpm run clean
+          pnpm run build
           export COMMIT_HASH=`git log -1 --pretty=format:"%H"`
-          npm run deploy
+          pnpm run deploy
         env:
           CI: true
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
