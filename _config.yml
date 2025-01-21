@@ -13,7 +13,7 @@ timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://www.zedd.dev
+url: https://zedd.dev
 root: /
 permalink: /:year/:month/:day/:hash/
 permalink_defaults:
@@ -79,7 +79,7 @@ theme: cactus
 theme_config:
   colorscheme: dark
   highlight: tomorrow-night-bright
-  projects_url: https://github.com/zedd-dev/www
+  projects_url: https://github.com/zed76r/blogs
   social_links:
     github: https://github.com/zed76r
     mail: mailto:dev@zedd.dev
@@ -100,7 +100,7 @@ theme_config:
   nav:
     home: /
     articles: /archives/
-    projects: https://github.com/zedd-dev/www
+    projects: https://github.com/zed76r/blogs
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

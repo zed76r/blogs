@@ -9,7 +9,7 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "server": "hexo server",
-    "deploy": "node ./deploy.js"
+    "deploy": "hexo deploy"
   },
   "dependencies": {
     "hexo": "^7.3.0",
