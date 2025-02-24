@@ -82,9 +82,9 @@ theme_config:
   projects_url: https://github.com/zed76r/blogs
   social_links:
     github: https://github.com/zed76r
-    mail: mailto:dev@zedd.dev
+    mail: mailto:zed@zedd.dev
   gravatar:
-    email: dev@zedd.dev
+    email: zed@zedd.dev
   logo:
     enabled: true
     width: 50
