@@ -99,5 +99,4 @@ typings/
 # Ignore all local history of files
 .history
 
-# End of https://www.gitignore.io/api/node,hexo,visualstudiocode
-
+package-lock.json
