@@ -40,10 +40,13 @@ post_asset_folder: true
 relative_link: false
 future: true
 highlight:
-  enable: true
+  enable: false
   line_number: false
   auto_detect: false
   tab_replace:
+
+prism_plugin:
+  enable: false
   
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -75,32 +78,7 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 # theme: landscape
-theme: cactus
-theme_config:
-  colorscheme: dark
-  highlight: tomorrow-night-bright
-  projects_url: https://github.com/zed76r/blogs
-  social_links:
-    github: https://github.com/zed76r
-    mail: mailto:zed@zedd.dev
-  gravatar:
-    email: zed@zedd.dev
-  logo:
-    enabled: true
-    width: 50
-    height: 50
-    gravatar: true
-  favicon:
-    desktop:
-      gravatar: true
-    android:
-      gravatar: true
-    apple:
-      gravatar: true
-  nav:
-    home: /
-    articles: /archives/
-    projects: https://github.com/zed76r/blogs
+theme: fluid
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
