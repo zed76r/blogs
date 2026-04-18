@@ -27,6 +27,12 @@
     "gh-pages": "^6.3.0"
   },
   "pnpm": {
+    "overrides": {
+      "brace-expansion@^1.1.7": "^1.1.13",
+      "brace-expansion@^2.0.1": "^2.0.3",
+      "dompurify": "^3.4.0",
+      "picomatch": "^2.3.2"
+    },
     "onlyBuiltDependencies": [
       "hexo-util"
     ]
