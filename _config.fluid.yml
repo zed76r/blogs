@@ -9,6 +9,11 @@ dark_mode:
   enable: true
   default: dark
 
+# 网站图标
+# Site icons
+favicon: /img/favicon.png
+apple_touch_icon: /img/apple-touch-icon.png
+
 # 导航栏
 # Navigation bar
 navbar:
