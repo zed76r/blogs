@@ -1,0 +1,230 @@
+/* Site presentation overrides. Keep Fluid and article sources independent. */
+:root {
+  --body-bg-color: #fbfcfd;
+  --board-bg-color: #fbfcfd;
+  --text-color: #28333e;
+  --sec-text-color: #637181;
+  --post-text-color: #28333e;
+  --post-heading-color: #202b36;
+  --post-link-color: #35658b;
+  --link-hover-color: #234b6a;
+  --line-color: #dce2e8;
+  --navbar-bg-color: #fbfcfd;
+  --navbar-text-color: #28333e;
+  --subtitle-color: #28333e;
+  --journal-accent: #407fae;
+  --journal-glow: rgba(75, 153, 205, .13);
+  --journal-grid: rgba(64, 127, 174, .10);
+}
+
+[data-user-color-scheme="dark"] {
+  --body-bg-color: #232930;
+  --board-bg-color: #232930;
+  --text-color: #dce2e8;
+  --sec-text-color: #a5b0bb;
+  --post-text-color: #dce2e8;
+  --post-heading-color: #eef1f4;
+  --post-link-color: #a3c3df;
+  --link-hover-color: #c9deee;
+  --line-color: #3c4651;
+  --navbar-bg-color: #232930;
+  --navbar-text-color: #dce2e8;
+  --subtitle-color: #dce2e8;
+  --journal-accent: #85bde5;
+  --journal-glow: rgba(75, 153, 205, .19);
+  --journal-grid: rgba(133, 189, 229, .10);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  letter-spacing: 0;
+  line-height: 1.8;
+}
+
+/* A quiet masthead followed by the page title, without a cover image. */
+.header-inner { height: auto !important; max-height: none; }
+#navbar {
+  position: relative;
+  padding: 22px 24px;
+  background: var(--body-bg-color);
+  box-shadow: none;
+  transition: none;
+}
+#navbar > .container { max-width: 860px; padding: 0; }
+#navbar .navbar-brand { font-size: 21px; letter-spacing: -.5px; }
+#navbar .navbar-brand strong { font-weight: 650; }
+#navbar .navbar-brand::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 0 3px 9px;
+  border-radius: 50%;
+  background: var(--journal-accent);
+  box-shadow: 0 0 12px var(--journal-glow);
+}
+#navbar .nav-link { padding: 6px 12px; font-size: 14px; }
+#navbar .nav-link i:not(:only-child) { display: none; }
+#banner {
+  height: auto;
+  background: none !important;
+  transform: none !important;
+  isolation: isolate;
+}
+#banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 74% 35%, var(--journal-glow), transparent 58%),
+    linear-gradient(var(--journal-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--journal-grid) 1px, transparent 1px);
+  background-size: auto, 32px 32px, 32px 32px;
+  mask-image: linear-gradient(90deg, transparent 18%, #000 65%, transparent),
+    linear-gradient(transparent, #000 25%, #000 65%, transparent);
+  mask-composite: intersect;
+}
+#banner .full-bg-img { position: static; }
+#banner .mask {
+  position: static;
+  display: block;
+  background: none !important;
+}
+#banner .banner-text {
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 58px 0 38px;
+  text-align: left !important;
+  animation: none;
+  color: var(--text-color);
+}
+#banner .h2 { font-size: 30px; line-height: 1.5; font-weight: 600; }
+#banner .post-meta { color: var(--sec-text-color); font-size: 13px; margin-top: 14px; }
+#banner .post-meta .iconfont { display: none; }
+#banner .banner-text > .mt-3,
+#banner .banner-text > .mt-1 { display: inline-block; margin-right: 18px; }
+.scroll-down-bar { display: none; }
+
+/* One continuous reading surface; spacing gives each entry its place. */
+main > .container { max-width: 890px; }
+#board {
+  margin-top: 0 !important;
+  padding: 0 0 32px;
+  border-radius: 0;
+  box-shadow: none;
+}
+#board > .container { padding: 0; }
+#board > .container > .row { margin: 0; }
+#board > .container > .row > .col-12 { max-width: 100%; flex-basis: 100%; padding: 0; }
+.index-card { margin-bottom: 0; padding: 27px 0 29px; }
+.index-card + .index-card { border-top: 1px solid var(--line-color); }
+.index-info { padding: 0; }
+.index-card { position: relative; }
+.index-card::before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 33px;
+  width: 2px;
+  height: 22px;
+  border-radius: 2px;
+  background: var(--journal-accent);
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+.index-card:focus-within::before { opacity: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .index-header a { transition: color .18s ease; }
+  .index-card:hover::before { opacity: 1; }
+  .index-card:hover .index-header a { color: var(--journal-accent); }
+}
+.index-header {
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.6;
+  white-space: normal;
+  overflow: visible;
+  display: block;
+  margin: 0 0 8px;
+}
+.index-header a:hover { text-decoration: underline; text-underline-offset: 5px; }
+.index-excerpt, .index-excerpt__noimg { margin: 0 0 13px; height: auto; max-height: none; font-size: 15px; }
+.index-excerpt > div { line-height: 1.85; -webkit-line-clamp: 2; }
+.index-btm { font-size: 12px; line-height: 1.8; gap: 6px 0; }
+.index-btm .iconfont { display: none; }
+.index-btm time { font-variant-numeric: tabular-nums; }
+.index-btm .post-meta a { margin-right: 8px; }
+.list-group-item .list-group-item-title { white-space: normal; overflow-wrap: anywhere; }
+.list-group-item time { color: var(--sec-text-color); font-variant-numeric: tabular-nums; }
+
+/* Article text stays at a comfortable measure, including long code samples. */
+#board-ctn { max-width: 810px; }
+.post-content { padding: 8px 20px 0; max-width: 760px; }
+body:has(.post-content) #banner .banner-text { max-width: 720px; }
+.markdown-body { font-family: inherit; font-size: 16px; line-height: 1.95; }
+.markdown-body p { margin-bottom: 1.4em; }
+.markdown-body h2 { margin-top: 2em; padding-bottom: .4em; font-size: 1.45em; }
+.markdown-body h3 { margin-top: 1.8em; font-size: 1.2em; }
+.markdown-body a { text-decoration: underline; text-underline-offset: 3px; }
+.markdown-body pre, .markdown-body code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: .875em;
+}
+.markdown-body pre { line-height: 1.7; border-radius: 4px; }
+.markdown-body pre code { font-size: 1em; }
+.markdown-body img { border-radius: 2px; }
+.markdown-body blockquote { border-left-width: 3px; color: var(--sec-text-color); }
+.markdown-body :is(h1, h2, h3, h4) { scroll-margin-top: 24px; }
+.toc { font-size: 12px; }
+.license-box { border-radius: 4px; box-shadow: none; }
+footer { color: var(--sec-text-color); font-size: 12px; }
+footer .footer-inner { padding: 32px 20px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--post-link-color); outline-offset: 4px; }
+
+@media (max-width: 991.98px) {
+  #navbar { padding: 18px 24px; }
+  #banner .banner-text { padding: 38px 24px 24px; }
+  #banner .h2 { font-size: 26px; }
+  /* Override Fluid's !important mobile edge-to-edge utility. */
+  main > .container { padding: 0 24px !important; }
+  .post-content { padding: 8px 24px 0; }
+  #mobile-grid-menu { background: var(--body-bg-color); }
+  #mobile-grid-menu .container { padding: 20px 24px; }
+  #mobile-grid-menu .row { margin: 0; }
+  #mobile-grid-menu .mobile-grid-cell {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0;
+    animation: none;
+  }
+  #mobile-grid-menu .mobile-grid-item {
+    align-items: flex-start;
+    min-height: 52px;
+    padding: 14px 0;
+    border-radius: 0;
+    background: none;
+    transform: none;
+  }
+  #mobile-grid-menu .mobile-grid-item i { display: none; }
+  #mobile-grid-menu .mobile-grid-item span { font-size: 16px; }
+}
+
+@media (max-width: 575.98px) {
+  #navbar { padding: 16px 20px; }
+  #banner .banner-text { padding: 30px 20px 16px; }
+  #banner .h2 { font-size: 23px; }
+  main > .container { padding: 0 20px !important; }
+  .index-card { padding: 22px 0; }
+  .index-header { font-size: 19px; }
+  .index-excerpt { font-size: 14px; }
+  .post-content { padding: 8px 20px 0; }
+  .markdown-body { font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

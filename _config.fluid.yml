@@ -3,6 +3,16 @@
 # https://hexo.fluid-dev.com/docs/guide/
 #---------------------------
 
+# 本站排版层，独立于 npm 主题包维护
+custom_css:
+  - /css/journal.css
+
+banner:
+  parallax: false
+
+scroll_down_arrow:
+  enable: false
+
 # 暗色模式默认开启
 # Dark mode default
 dark_mode:
@@ -55,7 +65,7 @@ fun_features:
     visible: hover
     icon: ""
   progressbar:
-    enable: true
+    enable: false
     height_px: 2
     color: "#29d"
     options: { showSpinner: false, trickleSpeed: 100 }

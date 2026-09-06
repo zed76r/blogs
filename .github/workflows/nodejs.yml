@@ -1,9 +1,15 @@
 name: Node CI
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -11,25 +17,29 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js latest
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: latest
-      - name: install, build, and deploy
-        run: |
-          npm i -g pnpm
-          pnpm i
-          pnpm run clean
-          pnpm run build
+          node-version-file: .node-version
+      - name: Set up pnpm
+        run: npm install --global "$(node -p 'require("./package.json").packageManager')"
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check build
+        run: pnpm run check
         env:
           CI: true
-          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
       - name: Upload Pages artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
   deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
     permissions:
       pages: write
       id-token: write

@@ -2,6 +2,10 @@
   "name": "hexo-www-zedd-dev",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@12.3.4",
+  "engines": {
+    "node": "24.x"
+  },
   "hexo": {
     "version": "8.1.1"
   },
@@ -9,7 +13,7 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "server": "hexo server",
-    "deploy": "hexo deploy"
+    "check": "hexo clean && hexo generate"
   },
   "dependencies": {
     "hexo": "^8.1.1",
@@ -22,8 +26,5 @@
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
     "hexo-theme-fluid": "^1.9.9"
-  },
-  "devDependencies": {
-    "gh-pages": "^6.3.0"
   }
 }
